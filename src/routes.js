@@ -23,11 +23,27 @@ const DeliveryNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerTintColor: '#fff',
+        headerStyle: {
+          backgroundColor: '#7159c1',
+          elevation: 0,
+        },
       }}
     >
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-      <Stack.Screen name="DeliveryDetails" component={DeliveryDetails} />
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="DeliveryDetails"
+        component={DeliveryDetails}
+        options={{
+          title: 'Detalhes da encomenda',
+        }}
+      />
       <Stack.Screen name="ConfirmDelivery" component={ConfirmDelivery} />
       <Stack.Screen name="NewProblem" component={NewProblem} />
       <Stack.Screen name="Problems" component={Problems} />

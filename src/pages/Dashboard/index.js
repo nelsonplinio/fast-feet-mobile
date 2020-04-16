@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { RefreshControl } from 'react-native';
 import { useSelector } from 'react-redux';
 import api from '~/services/api';
 
@@ -17,20 +18,28 @@ import DeliveryItem from '~/components/DeliveryItem';
 
 export default function Dashboard() {
   const profile = useSelector((state) => state.user.profile);
+  const [page, setPage] = useState(1);
+  const [refreshing, setRefreshing] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
   const [delivered, setDelivered] = useState(false);
 
   useEffect(() => {
     async function loadDelivery() {
+      setRefreshing(true);
       const response = await api.get(`/deliveryman/${profile.id}/deliveries`, {
         params: { delivered },
       });
 
       setDeliveries(response.data);
+      setRefreshing(false);
     }
 
     loadDelivery();
-  }, [delivered, profile.id]);
+  }, [page, delivered, profile.id]);
+
+  const onRefresh = useCallback(() => {
+    setPage(1);
+  }, []);
 
   return (
     <Container>
@@ -53,10 +62,14 @@ export default function Dashboard() {
 
       <List
         data={deliveries}
+        refreshing={refreshing}
         keyExtractor={(delivery) => delivery.id}
         renderItem={({ item: delivery }) => (
           <DeliveryItem delivery={delivery} />
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         showsVerticalScrollIndicator={false}
       />
     </Container>

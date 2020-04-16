@@ -75,7 +75,7 @@ export const Footer = styled.View`
 `;
 
 export const InfoContainer = styled.View`
-  flex: 1;
+  flex: 1.5;
 `;
 
 export const InfoLabel = styled.Text`
@@ -92,11 +92,12 @@ export const Info = styled.Text`
 export const DetailsButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
+  flex: 1;
 `;
 
 export const TextDetailsButton = styled.Text`
   color: #7159c1;
   font-weight: bold;
   font-size: 14px;
-  flex: 1;
+  align-self: stretch;
 `;

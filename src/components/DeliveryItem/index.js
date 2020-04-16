@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -20,6 +21,8 @@ import {
 } from './styles';
 
 export default function DeliveryItem({ delivery }) {
+  const navigation = useNavigation();
+
   const date = useMemo(
     () => format(parseISO(delivery.createdAt), 'dd/MM/yyyy'),
     [delivery]
@@ -70,7 +73,9 @@ export default function DeliveryItem({ delivery }) {
           <Info>{delivery.recipient.city}</Info>
         </InfoContainer>
 
-        <DetailsButton>
+        <DetailsButton
+          onPress={() => navigation.navigate('DeliveryDetails', { delivery })}
+        >
           <TextDetailsButton>Ver Detalhes</TextDetailsButton>
         </DetailsButton>
       </Footer>
