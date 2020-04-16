@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signInRequest } from '~/store/modules/auth/actions';
 
 import getErroMessages from '~/utils/getErroMessages';
@@ -22,10 +22,10 @@ const schema = Yup.object().shape({
 
 export default function SignIn() {
   const formRef = useRef(null);
+  const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
 
   async function handleSubmit(data) {
-    console.tron.log(data);
     try {
       await schema.validate(data, {
         abortEarly: false,
@@ -56,7 +56,10 @@ export default function SignIn() {
             }
             onSubmitEditing={() => formRef.current.submitForm()}
           />
-          <SubmitButton onPress={() => formRef.current.submitForm()}>
+          <SubmitButton
+            loading={loading}
+            onPress={() => formRef.current.submitForm()}
+          >
             Entrar no sistema
           </SubmitButton>
         </InnerForm>
