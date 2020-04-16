@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,7 +21,11 @@ const MaterialBottom = createMaterialBottomTabNavigator();
 
 const DeliveryNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="DeliveryDetails" component={DeliveryDetails} />
       <Stack.Screen name="ConfirmDelivery" component={ConfirmDelivery} />
@@ -33,12 +38,14 @@ const DeliveryNavigator = () => {
 const TabNavigator = () => {
   return (
     <MaterialBottom.Navigator
-      barStyle={{
-        backgroundColor: '#fff',
-      }}
-      inactiveColor="#rgba(100, 100, 100, 0.9)"
       activeColor="#7159c1"
       sceneAnimationEnabled
+      barStyle={{
+        borderTopWidth: 2,
+        backgroundColor: '#fff',
+        borderTopColor: '#f1f1f1',
+      }}
+      inactiveColor="#rgba(100, 100, 100, 0.9)"
     >
       <MaterialBottom.Screen
         name="Delivery"
@@ -69,7 +76,17 @@ export default function Routes() {
   const signed = useSelector((state) => state.auth.signed);
   return (
     <NavigationContainer>
-      {signed ? <TabNavigator /> : <SignIn />}
+      {signed ? (
+        <>
+          <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+          <TabNavigator />
+        </>
+      ) : (
+        <>
+          <StatusBar backgroundColor="#7159c1" barStyle="light-content" />
+          <SignIn />
+        </>
+      )}
     </NavigationContainer>
   );
 }

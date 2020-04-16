@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { parseISO, format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
@@ -25,8 +25,6 @@ export default function Profile() {
   function handleLogout() {
     dispatch(signOut());
   }
-
-  console.tron.log(profile);
 
   return (
     <Container>

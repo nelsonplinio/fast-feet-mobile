@@ -7,9 +7,11 @@ export default function ImageProfile({ source, nameOfUser, ...rest }) {
   const letters = useMemo(() => {
     const [first, second] = nameOfUser.toUpperCase().split(' ');
 
-    return `${first[0]}${second[0] || ''}`;
+    return `${first[0]}${second ? second[0] : ''}`;
   }, [nameOfUser]);
-  return (
+  return source && source.uri ? (
+    <Image source={source} {...rest} />
+  ) : (
     <Container {...rest}>
       {source && source.uri ? (
         <Image source={source} />

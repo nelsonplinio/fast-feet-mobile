@@ -5,6 +5,8 @@ import Button from '~/components/Button';
 export const Container = styled.View`
   align-items: center;
   padding: 32px;
+  background: #fff;
+  flex: 1;
 `;
 
 export const Image = styled(ImageProfile)`
