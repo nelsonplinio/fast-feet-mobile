@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   Container,
   Header,
-  Details,
+  Content,
   Card,
   CardTop,
   CardTitle,
@@ -67,7 +67,7 @@ export default function DeliveryDetails() {
       <Container>
         <Header />
 
-        <Details>
+        <Content>
           <Card>
             <CardTop>
               <Icon name="truck" size={26} color="#7159c1" />
@@ -127,7 +127,13 @@ export default function DeliveryDetails() {
           </Card>
 
           <ActionContainer>
-            <ActionButton onPress={() => navigation.navigate('NewProblem')}>
+            <ActionButton
+              onPress={() =>
+                navigation.navigate('NewProblem', {
+                  delivery_id: delivery.id,
+                })
+              }
+            >
               <Icon name="close-circle-outline" size={26} color="#E74040" />
               <TextButton>Informar Problema</TextButton>
             </ActionButton>
@@ -148,7 +154,7 @@ export default function DeliveryDetails() {
               <TextButton>Confirmar Entrega</TextButton>
             </ActionButton>
           </ActionContainer>
-        </Details>
+        </Content>
       </Container>
     </>
   );

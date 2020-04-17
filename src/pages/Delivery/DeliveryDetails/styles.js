@@ -10,11 +10,11 @@ export const Container = styled.ScrollView`
 
 export const Header = styled.View`
   background: #7159c1;
-  height: ${height * 0.15}px;
+  height: ${height * 0.12}px;
 `;
 
-export const Details = styled.View`
-  margin-top: -${height * 0.09}px;
+export const Content = styled.View`
+  margin-top: -${height * 0.08}px;
   padding: 0 16px;
 `;
 
