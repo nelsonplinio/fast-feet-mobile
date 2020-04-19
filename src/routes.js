@@ -44,7 +44,13 @@ const DeliveryNavigator = () => {
           title: 'Detalhes da encomenda',
         }}
       />
-      <Stack.Screen name="ConfirmDelivery" component={ConfirmDelivery} />
+      <Stack.Screen
+        name="ConfirmDelivery"
+        component={ConfirmDelivery}
+        options={{
+          title: 'Confirmar entrega',
+        }}
+      />
       <Stack.Screen
         name="NewProblem"
         component={NewProblem}
