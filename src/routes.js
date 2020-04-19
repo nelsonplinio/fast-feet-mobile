@@ -52,7 +52,13 @@ const DeliveryNavigator = () => {
           title: 'Informar problema',
         }}
       />
-      <Stack.Screen name="Problems" component={Problems} />
+      <Stack.Screen
+        name="Problems"
+        component={Problems}
+        options={{
+          title: 'Visualizar problemas',
+        }}
+      />
     </Stack.Navigator>
   );
 };

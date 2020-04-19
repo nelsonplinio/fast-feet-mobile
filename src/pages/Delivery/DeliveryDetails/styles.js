@@ -3,7 +3,9 @@ import { Dimensions } from 'react-native';
 
 const { height } = Dimensions.get('screen');
 
-export const Container = styled.ScrollView`
+export const Container = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   flex: 1;
   background: #fff;
 `;

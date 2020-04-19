@@ -140,7 +140,9 @@ export default function DeliveryDetails() {
 
             <Divider />
 
-            <ActionButton onPress={() => navigation.navigate('Problems')}>
+            <ActionButton
+              onPress={() => navigation.navigate('Problems', { delivery })}
+            >
               <Icon name="alert-circle-outline" size={26} color="#E7BA40" />
               <TextButton>Visualizar Problemas</TextButton>
             </ActionButton>
@@ -148,7 +150,9 @@ export default function DeliveryDetails() {
             <Divider />
 
             <ActionButton
-              onPress={() => navigation.navigate('ConfirmDelivery')}
+              onPress={() =>
+                navigation.navigate('ConfirmDelivery', { delivery })
+              }
             >
               <Icon name="check-circle-outline" size={26} color="#7159c1" />
               <TextButton>Confirmar Entrega</TextButton>

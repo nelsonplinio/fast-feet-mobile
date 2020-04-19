@@ -14,7 +14,7 @@ import {
   SubmitButton,
   UnForm,
   UnInput,
-} from './styled';
+} from './styles';
 
 const schema = Yup.object().shape({
   description: Yup.string().required('Uma descrição e necessario.'),
@@ -56,16 +56,18 @@ export default function NewProblem() {
             <UnInput
               name="description"
               multiline
+              autoFocus
+              autoCorrect={false}
               onChangeText={(value) =>
                 formRef.current.setFieldValue('description', value)
               }
               placeholder="Inclua aqui o problema que ocorreu na entrega."
               returnKeyType="send"
-              onEndEditing={() => formRef.current.submitForm()}
             />
           </Card>
           <SubmitButton
             loading={loading}
+            disabled={loading}
             onPress={() => formRef.current.submitForm()}
           >
             Enviar

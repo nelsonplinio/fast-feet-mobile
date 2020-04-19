@@ -63,7 +63,7 @@ export default function Dashboard() {
       <List
         data={deliveries}
         refreshing={refreshing}
-        keyExtractor={(delivery) => delivery.id}
+        keyExtractor={(delivery) => String(delivery.id)}
         renderItem={({ item: delivery }) => (
           <DeliveryItem delivery={delivery} />
         )}
