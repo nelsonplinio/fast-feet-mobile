@@ -19,27 +19,41 @@ import DeliveryItem from '~/components/DeliveryItem';
 export default function Dashboard() {
   const profile = useSelector((state) => state.user.profile);
   const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
   const [refreshing, setRefreshing] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
   const [delivered, setDelivered] = useState(false);
 
-  useEffect(() => {
-    async function loadDelivery() {
-      setRefreshing(true);
-      const response = await api.get(`/deliveryman/${profile.id}/deliveries`, {
-        params: { delivered },
-      });
+  async function loadDelivery() {
+    setRefreshing(true);
+    const response = await api.get(`/deliveryman/${profile.id}/deliveries`, {
+      params: { delivered, page },
+    });
 
-      setDeliveries(response.data);
-      setRefreshing(false);
+    const { list, totalPage: total } = response.data;
+    if (page === 1) {
+      setDeliveries(list);
+    } else {
+      setDeliveries([...deliveries, ...list]);
     }
+    setTotalPage(total);
+    setRefreshing(false);
+  }
 
+  useEffect(() => {
     loadDelivery();
-  }, [page, delivered, profile.id]);
+  }, [delivered, page]);
 
   const onRefresh = useCallback(() => {
     setPage(1);
+    setTotalPage(0);
   }, []);
+
+  function loadMore() {
+    if (page < totalPage) {
+      setPage(page + 1);
+    }
+  }
 
   return (
     <Container>
@@ -71,6 +85,8 @@ export default function Dashboard() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         showsVerticalScrollIndicator={false}
+        onEndReached={loadMore}
+        onEndReachedThreshold={0.1}
       />
     </Container>
   );
